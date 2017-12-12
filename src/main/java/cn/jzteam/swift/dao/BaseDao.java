@@ -1,10 +1,9 @@
 package cn.jzteam.swift.dao;
 
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 
 /**
  * 数据库基本操作。
