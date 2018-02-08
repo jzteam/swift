@@ -28,13 +28,7 @@ public abstract class AbstractBaseServiceImpl<E, PK> implements BaseService<E, P
     public PK insert(E entity){
         final long insert = dao.insert(entity);
         if(insert > 0){
-            try {
-                final Field idField = entity.getClass().getDeclaredField("id");
-                idField.setAccessible(true);
-                return (PK) idField.get(entity);
-            }catch (Exception e){
-                throw new RuntimeException("insert成功，获取id失败");
-            }
+            return pkValue(entity);
         }else{
             throw new RuntimeException("insert 失败");
         }
@@ -288,5 +282,33 @@ public abstract class AbstractBaseServiceImpl<E, PK> implements BaseService<E, P
         result.setTotalCount(count);
 
         return result;
+    }
+
+    @Override
+    public PK save(E entity){
+        if(entity == null){
+            return null;
+        }
+
+        PK id = pkValue(entity);
+        if(id == null){
+            return this.insert(entity);
+        }else{
+            this.update(entity);
+            return id;
+        }
+    }
+
+    private PK pkValue(Object obj){
+        if(obj == null){
+            return null;
+        }
+        try {
+            final Field idField = obj.getClass().getDeclaredField("id");
+            idField.setAccessible(true);
+            return (PK) idField.get(obj);
+        }catch (Exception e){
+            throw new RuntimeException("获取id失败");
+        }
     }
 }

@@ -138,4 +138,11 @@ public interface BaseService<E, PK> {
      */
     PageResult<E> queryPage(QueryCondition query);
 
+    /**
+     * 插入或修改
+     * @param entity
+     * @return
+     */
+    PK save(E entity);
+
 }
