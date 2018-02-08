@@ -1,6 +1,7 @@
 package cn.jzteam.swift.dao;
 
 
+import cn.jzteam.swift.query.QueryCondition;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -8,13 +9,13 @@ import java.util.List;
 /**
  * 数据库基本操作。
  */
-public interface BaseDao<E, Q, PK> {
+public interface BaseDao<E, PK> {
 
     /**
      * 插入一条记录。
      *
      * @param entity
-     * @return
+     * @return 数量
      */
     long insert(@Param("entity") E entity);
     
@@ -53,7 +54,7 @@ public interface BaseDao<E, Q, PK> {
      * @param entityList
      * @return
      */
-    long updateBatch(@Param("list") E entityList);
+    long updateBatch(@Param("list") List<E> entityList);
     
     /**
      * 根据条件更新entity
@@ -61,7 +62,7 @@ public interface BaseDao<E, Q, PK> {
      * @param query
      * @return
      */
-    long updateSpecial(@Param("entity") E entity, @Param("query") Q query);
+    long updateSpecial(@Param("entity") E entity, @Param("query") QueryCondition query);
     
     /**
      * 根据id把field字段增加delta，限于数字类型
@@ -100,7 +101,7 @@ public interface BaseDao<E, Q, PK> {
      * @param id
      * @return
      */
-    E selectById_notry(@Param("id") PK id);
+    E selectById_readLock(@Param("id") PK id);
 
     /**
      * 根据条件获取一条记录。
@@ -108,7 +109,7 @@ public interface BaseDao<E, Q, PK> {
      * @param query
      * @return
      */
-    E selectFirstOne(@Param("query") Q query);
+    E selectFirstOne(@Param("query") QueryCondition query);
 
     /**
      * 根据条件获取列表。
@@ -116,7 +117,7 @@ public interface BaseDao<E, Q, PK> {
      * @param query
      * @return
      */
-    List<E> selectList(@Param("query") Q query);
+    List<E> selectList(@Param("query") QueryCondition query);
 
     /**
      * 获取满足条件的记录数。
@@ -124,7 +125,7 @@ public interface BaseDao<E, Q, PK> {
      * @param query
      * @return
      */
-    long queryPageCount(@Param("query") Q query);
+    long queryCount(@Param("query") QueryCondition query);
 
     /**
      * 获取指定页码的所有记录。
@@ -132,6 +133,6 @@ public interface BaseDao<E, Q, PK> {
      * @param query
      * @return
      */
-    List<E> queryPageList(@Param("query") Q query);
+    List<E> queryPageList(@Param("query") QueryCondition query);
 
 }
