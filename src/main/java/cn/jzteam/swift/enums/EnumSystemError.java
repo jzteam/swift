@@ -41,7 +41,9 @@ public enum EnumSystemError implements IEnumBizError {
     }
 
     public String getMessage() {
-        return LocaleUtil.getMessage(this.message);
+//        return LocaleUtil.getMessage(this.message);
+        // TODO 暂未开发国际化
+        return this.message;
     }
 
     public String toString() {

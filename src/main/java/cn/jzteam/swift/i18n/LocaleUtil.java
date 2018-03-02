@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Component
+//@Component
 public class LocaleUtil {
     private static final Logger log = LoggerFactory.getLogger(LocaleUtil.class);
     public static final String SPIDER = "spider";
@@ -45,8 +45,8 @@ public class LocaleUtil {
 
     @Autowired
     public LocaleUtil(LocaleResolver localeResolver, MessageSource messageSource) {
-        localeResolver = localeResolver;
-        messageSource = messageSource;
+        LocaleUtil.localeResolver = localeResolver;
+        LocaleUtil.messageSource = messageSource;
     }
 
     public static void setInitLocale(HttpServletRequest request, HttpServletResponse response) {

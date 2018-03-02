@@ -16,15 +16,16 @@ public interface IEnumBizError {
     int getCode();
 
     default String getMessage() {
-        String msg = LocaleUtil.getMessage("error.code.biz." + getCode());
-        final Locale locale = LocaleContextHolder.getLocale();
-
-        // 简体转繁体
-        if (StringUtils.containsAny(locale.toString().toLowerCase(), LocaleUtil.TRADITIONAL_CHINESE)) {
-            msg = ZHConvertUtil.convert(msg, ZHConvertUtil.TRADITIONAL);
-        }
-
-        return msg;
+//        String msg = LocaleUtil.getMessage("error.code.biz." + getCode());
+//        final Locale locale = LocaleContextHolder.getLocale();
+//
+//        // 简体转繁体
+//        if (StringUtils.containsAny(locale.toString().toLowerCase(), LocaleUtil.TRADITIONAL_CHINESE)) {
+//            msg = ZHConvertUtil.convert(msg, ZHConvertUtil.TRADITIONAL);
+//        }
+//
+//        return msg;
+        return "暂未开发国际化";
     }
 
     default String info() {
